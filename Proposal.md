@@ -20,5 +20,13 @@ Combat will be real-time, meaning events will happen even if the user leaves the
 
 ## Tuesday-Thursday Daily Goals
 ### *Tuesday*
-By the end of Tuesday, we plan to have the player movement and shooting finished. Movement will be done with the keyboard.
-This day may also include adding zombies to the game.
+By the end of Tuesday, we plan to have the player movement and shooting near-finished. Movement will be done with the keyboard.
+This day may also include adding zombies to the game, and doing some math on the wave count.
+### *Wednesday*
+By the end of Wednesday, we hope to have the zombie AI finished, and the main loop complete with the high score system.
+### *Thursday*
+Thursday will be about finalizing the game, and adding any additional content that seems appropriate, with the possiblity of more than one map, and adding zombie variants.
+This day will also include fixing as many bugs as we can.
+
+## How Will You Utilize The Content Covered This Unit
+Classes are at the core of Pygame, so they will be used heavily for sprite work. We plan to use a database to store the scores of players who enter in their information.
