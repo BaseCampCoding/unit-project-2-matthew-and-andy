@@ -4,8 +4,6 @@ pygame.init()
 
 clock = pygame.time.Clock()
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
 
 from pygame.locals import (
     K_UP,
@@ -25,14 +23,19 @@ FRAMERATE = 120
 
 running = True
 
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 while running:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
-            if event.type == pygame.QUIT:
+            print(running)
+        if event.type == pygame.QUIT:
                 running = False
     
-    screen.fill((0, 0, 0))
+    screen.fill((255, 255, 255))
     pygame.display.flip()
     clock.tick(FRAMERATE)
+
+pygame.quit()
