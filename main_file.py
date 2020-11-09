@@ -25,11 +25,14 @@ FRAMERATE = 120
 
 running = True
 
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
 while running:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.type == pygame.QUIT:
                 running = False
     
+    screen.fill((0, 0, 0))
     pygame.display.flip()
     clock.tick(FRAMERATE)
