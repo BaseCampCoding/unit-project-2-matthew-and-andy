@@ -11,22 +11,24 @@ with the addition of unique weapons and the mentioned high score board. Of cours
 This game will be unique in having various zombie types, similar to Left 4 Dead 2.
 
 ## Core User Workflows
-This game will be centered around surviving an onslaught of zombies. Over time, Zombies will spawn more frequently, have more hit points, and can move faster.
-In later stages of difficulty, different zombie types will spawn, like hulking beasts or speedy ones that are tiny.
-As the player kills zombies, they will get money. They can use this money to buy weapons, ammo, health upgrades, and armor.
-Their primary goal is to survive as long as possible. At the end of the game, once the player dies, they can give their name, and they will be put on their
-local high score list. This list will include their name, how long they lasted, and how many zombies they killed.
-Combat will be real-time, meaning events will happen even if the user leaves the keyboard.
+- The player will be focused on fighting zombies and buying new equipment and ammunition. 
+- If the player is hit by a zombie, they take damage. If their hit points gets to or below zero, they die, and the main game loop ends.
+- After they die, they are prompted to enter their name, with the following stored into a table: how long they survived and how many kills they got.
+- Once they enter in their name, they can view other scores on the board.
 
 ## Tuesday-Thursday Daily Goals
 ### *Tuesday*
-By the end of Tuesday, we plan to have the player movement and shooting near-finished. Movement will be done with the keyboard.
-This day may also include adding zombies to the game, and doing some math on the wave count.
+By the end of Tuesday, we plan to have the player movement and zombies added. Matthew will be focused on that. Andy will be working the spawn system, the balancing, and
+the store.
 ### *Wednesday*
-By the end of Wednesday, we hope to have the zombie AI finished, and the main loop complete with the high score system.
+By the end of Wednesday, we hope to have the zombie AI finished, and the main loop complete with the high score system. Matthew will be focused on that AI, while Andy will
+be working on the high score system.
 ### *Thursday*
 Thursday will be about finalizing the game, and adding any additional content that seems appropriate, with the possiblity of more than one map, and adding zombie variants.
-This day will also include fixing as many bugs as we can.
+This day will also include fixing as many bugs as we can. Matthew will focus on this general debug and adding a new map, while Andy will focus on adding new zombies.
 
 ## How Will You Utilize The Content Covered This Unit
-Classes are at the core of Pygame, so they will be used heavily for sprite work. We plan to use a database to store the scores of players who enter in their information.
+Classes are at the core of Pygame, so they will be used heavily for sprite work. This includes the player object, the zombies, the walls, the bullets, and anything else
+that will be rendered onscreen.
+We plan to use a database to store the scores of players who enter in their information. This information will include their name, how long they survived, and how many kills
+they got. Each row on the table will be an entry to the score board.
