@@ -9,18 +9,36 @@ player = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
+bullets = pygame.sprite.Group()
+
 running = True
 
 while running:
     screen.fill((0, 25, 0))
     for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_g:
+                new_bullet = Bullet((player.rect.left + 12, player.rect.top + 12), player.angle)
+                bullets.add(new_bullet)
+                all_sprites.add(new_bullet)
+            elif event.key == pygame.K_r:
+                player.angle -= 1
+            elif event.key == pygame.K_t:
+                player.angle += 1
+            
+            if player.angle >= 8:
+                player.angle = 0
+            elif player.angle <= -1:
+                player.angle = 7
         if event.type == pygame.QUIT:
-                running = False
+            running = False
     
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys)
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
+    for bullet in bullets:
+        bullet.update()
 
     screen.blit(player.surf, player.rect)
     pygame.display.flip()
