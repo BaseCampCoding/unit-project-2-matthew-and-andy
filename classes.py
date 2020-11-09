@@ -22,7 +22,6 @@ class Player(pygame.sprite.Sprite):
         self.surf = pygame.Surface((25, 25))
         self.surf.fill(colors["White"])
         self.rect = self.surf.get_rect()
-        self.angle = 0
     def update(self, pressed_keys):
         if pressed_keys[K_UP]:
             self.rect.move_ip(0, -speed)
@@ -51,6 +50,34 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = SCREEN_HEIGHT
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self, angle):
+    def __init__(self, cen: tuple, angle: int):
         self.surf = pygame.Surface((5, 5))
         self.surf.fill(colors["Red"])
+        self.rect = self.surf.get_rect(center=cen)
+        self.angle = angle
+        #0, up
+        #1, up and right
+        #2, right
+        #3, down and right
+        #4, down
+        #5, down and left
+        #6, left
+        #7, up and left
+    def update(self):
+        if self.angle == 0:
+            dir = (0, -2)
+        elif self.angle == 1:
+            dir = (2, -2)
+        elif self.angle == 2:
+            dir = (2, 0)
+        elif self.angle == 3:
+            dir = (2, 2)
+        elif self.angle == 4:
+            dir = (0, 2)
+        elif self.angle == 5:
+            dir = (-2, 2)
+        elif self.angle == 6:
+            dir = (-2, 0)
+        elif self.angle == 7:
+            dir = (-2, -2)
+        self.rect.pygame.Rect.move_ip(dir)
