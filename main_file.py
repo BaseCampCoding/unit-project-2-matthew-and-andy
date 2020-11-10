@@ -51,7 +51,7 @@ def use_shotgun():
         new_bullet = Bullet((player.rect.x + i, player.rect.y + j), player.angle)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
-wave = 0 
+wave = 1
 kills = 0
 sp_timer = 0
 while running:
@@ -110,6 +110,7 @@ while running:
             if pygame.sprite.collide_rect(b, i):
                 b.kill()
     for enemy in enemies_group:
+        enemy.update(player, all_sprites)
         for bullet in bullets:
             if pygame.sprite.collide_rect(enemy, bullet):
                 enemy.health -= bullet_damage

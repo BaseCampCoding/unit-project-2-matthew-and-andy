@@ -98,16 +98,16 @@ class Zombie(pygame.sprite.Sprite):
         speed = 1
         health = (5 + wave) * wave
         if variant == 0:
-            self.surf = pygame.Surface((25, 25))
-            self.surf.fill(colors["Green"])
+            self.surf = pygame.image.load(r"zombie.png").convert_alpha()
         else:
-            self.surf = pygame.Surface((20, 20))
-            self.surf.fill(colors["Green"])
+            self.surf = pygame.image.load(r"zombie.png").convert_alpha()
             health = int(round(health / 2))
             speed = 3
         self.speed = speed
         self.health = health
         self.rect = self.surf.get_rect(center=cor)
+        self.pre_x = 0
+        self.pre_y = 0
     
     def update(self, player, all_sprites):
         p_x = player.rect.right
@@ -143,10 +143,15 @@ class Zombie(pygame.sprite.Sprite):
                 move_y = 0
 
         hit = False
+        
         for i in all_sprites:
             if pygame.sprite.collide_rect(self, i) and not i == self:
-                hit = True
-                temp = i
+                try:
+                    if i.special_name == "Spawner":
+                        hit = False
+                except:
+                    hit = True
+                    temp = i
         if hit == True:
             if temp.rect.right > z_x and temp.rect.top < z_y:
                 move_y = 1
@@ -164,6 +169,12 @@ class Zombie(pygame.sprite.Sprite):
                 move_x = 1
                 move_y = 1
         self.rect.move_ip((move_x * self.speed, move_y * self.speed))
+        #animation
+        # pygame.transform.flip(, True, False)
+        if move_x != self.pre_x:
+            self.surf = pygame.transform.flip(self.surf, True, False)
+        self.pre_x = move_x
+        # self.pre_y = move_y
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, size: tuple):

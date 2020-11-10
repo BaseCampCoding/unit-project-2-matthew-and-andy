@@ -7,9 +7,8 @@ import random
 class Enemy_Spawner(pygame.sprite.Sprite):
     def __init__(self, cor: tuple):
         super(Enemy_Spawner, self).__init__()
-        self.image = pygame.image.load(r"zombie.png").convert_alpha()
-        self.surf = pygame.Surface((20, 20))
-        self.surf.fill((255, 255, 0))
+        self.special_name = "Spawner"
+        self.surf = pygame.image.load(r"z_spawner.png").convert_alpha()
         self.rect = self.surf.get_rect(center=cor)
         self.spawn_timer = random.randrange(220, 420)
         self.cur_time = 0
