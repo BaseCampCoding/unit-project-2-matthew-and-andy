@@ -1,7 +1,7 @@
 from constants import *
 from classes import * 
 from enemy_spawner import Enemy_Spawner
-
+from random import randint
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -38,14 +38,16 @@ is_shotgun = False
 gun_timer = 0
 timer_limit = 20
 
-money = 0
-
+money = 1000
 
 def use_shotgun():
-    for i in range(5):
-        new_bullet = Bullet((player.rect.left + 12 - i, player.rect.top + 12 - i), player.angle)
+    for m in range(5):
+        i = randint(-15, 15)
+        j = randint(-15, 15)
+        new_bullet = Bullet((player.rect.x + i, player.rect.y + j), player.angle)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
+
 while running:
     pressed_keys = pygame.key.get_pressed()
     screen.fill((0, 25, 0))
@@ -75,7 +77,7 @@ while running:
             new_bullet = Bullet((player.rect.left + 12, player.rect.top + 12), player.angle)
             bullets.add(new_bullet)
             all_sprites.add(new_bullet)
-            timer = 0
+            gun_timer = 0
     elif pressed_keys[K_g] and is_auto == True and is_shotgun == True:
         gun_timer += 1
         if gun_timer > timer_limit:
