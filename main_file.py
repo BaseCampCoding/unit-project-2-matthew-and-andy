@@ -2,6 +2,7 @@ from constants import *
 from classes import * 
 from enemy_spawner import Enemy_Spawner
 from random import randint
+from database import score, insert_score
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -149,5 +150,10 @@ while running:
 
 pygame.quit()
 
+cur_name = input("What is your name, so that we can put you on the leader board?")
+cur_score = score(cur_name, wave, kills)
+insert_score(cur_score)
+
+
 # TEMPORARY
-print(f"Kills: {kills}, Wave: {wave}")
+# print(f"Kills: {kills}, Wave: {wave}")
