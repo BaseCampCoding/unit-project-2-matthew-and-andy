@@ -15,13 +15,15 @@ con.commit()
 def insert_score(score):
     with con:
         cur.execute('INSERT INTO HighScore VALUES (:Name,:Wave,:Kills)',{'Name': score.Name, 'Wave':score.Wave, 'Kills': score.Kills})
-con.commit()
-cur.execute('SELECT Name, Wave, Kills FROM HighScore')
-print(cur.fetchall())
+    con.commit()
+def PrintOut():
+    cur.execute('SELECT Name, Wave, Kills FROM HighScore')
+    print(cur.fetchall())
+    con.close()
 
 class score():
     def __init__(self,Name, Wave, Kills):
         self.Name = Name 
         self.Wave = Wave 
         self.Kills = Kills
-con.close()
+=
