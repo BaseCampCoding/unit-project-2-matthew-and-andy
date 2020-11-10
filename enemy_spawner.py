@@ -14,7 +14,7 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         self.cur_time = 0
     
     def spawn_enemy(self, all_sprite, enemy_group, wave):
-        new_zombie = Zombie((self.rect.x, self.rect.y - 100), 0, wave)
+        new_zombie = Zombie((self.rect.x, self.rect.y - 60), 0, wave)
         all_sprite.add(new_zombie)
         enemy_group.add(new_zombie)
 

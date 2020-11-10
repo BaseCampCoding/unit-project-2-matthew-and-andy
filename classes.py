@@ -217,9 +217,9 @@ class Zombie(pygame.sprite.Sprite):
         self.rect.move_ip((move_x * self.speed, move_y * self.speed))
         #animation
         # pygame.transform.flip(, True, False)
-        if move_x != self.pre_x:
-            self.surf = pygame.transform.flip(self.surf, True, False)
-        self.pre_x = move_x
+        # if move_x != self.pre_x and move_x != 0:
+        #     self.surf = pygame.transform.flip(self.surf, True, False)
+        # self.pre_x = move_x
         # self.pre_y = move_y
 
 class Wall(pygame.sprite.Sprite):
