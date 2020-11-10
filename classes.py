@@ -27,23 +27,23 @@ class Player(pygame.sprite.Sprite):
         self.surf.fill(colors["White"])
         self.rect = self.surf.get_rect()
         self.angle = 0
-    def update(self, pressed_keys):
+    def update(self, pressed_keys, walls):
         if pressed_keys[K_UP]:
             self.rect.move_ip(0, -speed)
-            # if pygame.sprite.spritecollideany(player, walls):
-            #     self.rect.move_ip(0, speed)
+            if pygame.sprite.spritecollideany(self, walls):
+                self.rect.move_ip(0, speed)
         if pressed_keys[K_DOWN]:
             self.rect.move_ip(0, speed)
-            # if pygame.sprite.spritecollideany(player, walls):
-            #     self.rect.move_ip(0, -speed)
+            if pygame.sprite.spritecollideany(self, walls):
+                self.rect.move_ip(0, -speed)
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-speed, 0)
-            # if pygame.sprite.spritecollideany(player, walls):
-            #     self.rect.move_ip(speed, 0)
+            if pygame.sprite.spritecollideany(self, walls):
+                self.rect.move_ip(speed, 0)
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(speed, 0)
-            # if pygame.sprite.spritecollideany(player, walls):
-            #     self.rect.move_ip(-speed, 0)
+            if pygame.sprite.spritecollideany(self, walls):
+                self.rect.move_ip(-speed, 0)
 
         #collisions
         if self.rect.left < 0:
