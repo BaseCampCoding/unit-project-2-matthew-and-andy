@@ -1,5 +1,6 @@
 from constants import *
 from classes import * 
+from enemy_spawner import Enemy_Spawner
 
 clock = pygame.time.Clock()
 
@@ -19,10 +20,12 @@ wall = Wall((400, 400), (50, 50))
 all_sprites.add(wall)
 bullets = pygame.sprite.Group()
 
+spawner = Enemy_Spawner((300, 300))
+
 running = True
 
 while running:
-    zombie.update(player, all_sprites)
+    # zombie.update(player, all_sprites)
     screen.fill((0, 25, 0))
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -45,9 +48,11 @@ while running:
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys)
     for entity in all_sprites:
+        try:
+            entity.update()
+        except:
+            pass
         screen.blit(entity.surf, entity.rect)
-    for bullet in bullets:
-        bullet.update()
 
     screen.blit(player.surf, player.rect)
     pygame.display.flip()
