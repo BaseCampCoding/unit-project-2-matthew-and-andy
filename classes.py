@@ -179,14 +179,14 @@ class Store(pygame.sprite.Sprite):
         self.surf.fill(colors["Purple"])
         self.rect = self.surf.get_rect(center=cor)
 
-    def update(self, pressed_keys, Money):
+    def update(self, pressed_keys, Money, is_auto, is_shotgun):
         if pressed_keys[K_1] and Money >= 50:
             Money -= 50
             return 1
-        elif pressed_keys[K_2] and Money >= 100:
+        elif pressed_keys[K_2] and Money >= 100 and is_auto == False:
             Money -= 100 
             return 2 
-        elif pressed_keys[K_3] and Money >= 150:
+        elif pressed_keys[K_3] and Money >= 150 and is_shotgun == False:
             Money -= 150
             return 3
         else:
