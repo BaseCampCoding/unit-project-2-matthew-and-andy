@@ -26,7 +26,7 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         self.surf = pygame.Surface((20, 20))
         self.surf.fill((255, 255, 0))
         self.rect = self.surf.get_rect(cur)
-        self.spawn_timer = random.ranrange(220, 420)
+        self.spawn_timer = random.randrange(220, 420)
         self.cur_time = 0
     
     def update(self):
