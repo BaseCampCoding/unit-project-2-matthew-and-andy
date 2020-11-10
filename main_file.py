@@ -50,7 +50,8 @@ def use_shotgun():
         new_bullet = Bullet((player.rect.x + i, player.rect.y + j), player.angle)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
-
+wave = 0 
+sp_timer = 0
 while running:
     pressed_keys = pygame.key.get_pressed()
     screen.fill((0, 25, 0))
@@ -115,9 +116,12 @@ while running:
                     enemy.kill()
                 bullet.kill()
         enemy.update(player, all_sprites)
-    
+    sp_timer += 1
+    if sp_timer > 10000:
+        wave += 1
+        sp_timer = 0 
     for spawn in spawners:
-        spawn.update(all_sprites, enemies_group)
+        spawn.update(all_sprites, enemies_group, wave)
 
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
