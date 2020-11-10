@@ -20,6 +20,36 @@ from pygame.locals import (
 
 speed = 2
 
+class Aim(pygame.sprite.Sprite):
+    def __init__(self, player):
+        super(Aim, self).__init__()
+        self.surf = pygame.Surface((5, 5))
+        self.surf.fill(colors["Purple"])
+        self.rect = self.surf.get_rect()
+    def update(self, player):
+        mod_x = 0
+        mod_y = 0
+        if player.angle == 0:
+            mod_y = -40
+        elif player.angle == 1:
+            mod_x = 40
+            mod_y = -40
+        elif player.angle == 2:
+            mod_x = 40
+        elif player.angle == 3:
+            mod_x = 40
+            mod_y = 40
+        elif player.angle == 4:
+            mod_y = 40
+        elif player.angle == 5:
+            mod_x = -40
+            mod_y = 40
+        elif player.angle == 6:
+            mod_x = -40
+        else:
+            mod_x = -40
+            mod_y = -40
+        self.rect = self.surf.get_rect(center=(player.rect.x + mod_x + 10, player.rect.y + mod_y + 10))
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
@@ -55,6 +85,26 @@ class Player(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
+
+        #indicator
+        if self.angle == 0:
+            dir = (0, -5)
+        elif self.angle == 1:
+            dir = (5, -5)
+        elif self.angle == 2:
+            dir = (5, 0)
+        elif self.angle == 3:
+            dir = (5, 5)
+        elif self.angle == 4:
+            dir = (0, 5)
+        elif self.angle == 5:
+            dir = (-5, 5)
+        elif self.angle == 6:
+            dir = (-5, 0)
+        elif self.angle == 7:
+            dir = (-5, -5)
+        else:
+            dir = (0, 2)
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, angle: int):
@@ -146,12 +196,8 @@ class Zombie(pygame.sprite.Sprite):
         
         for i in all_sprites:
             if pygame.sprite.collide_rect(self, i) and not i == self:
-                try:
-                    if i.special_name == "Spawner":
-                        hit = False
-                except:
-                    hit = True
-                    temp = i
+                hit = True
+                temp = i
         if hit == True:
             if temp.rect.right > z_x and temp.rect.top < z_y:
                 move_y = 1
@@ -187,7 +233,7 @@ class Wall(pygame.sprite.Sprite):
 class Store(pygame.sprite.Sprite):
     def __init__(self, cor: tuple):
         super(Store, self).__init__()
-        self.surf = pygame.Surface((5, 5))
+        self.surf = pygame.Surface((15, 15))
         self.surf.fill(colors["Purple"])
         self.rect = self.surf.get_rect(center=cor)
 

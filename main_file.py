@@ -20,7 +20,7 @@ enemies_group = pygame.sprite.Group()
 
 walls = pygame.sprite.Group()
 
-wall = Wall((400, 400), (50, 50))
+wall = Wall((300, 300), (50, 50))
 all_sprites.add(wall)
 walls.add(wall)
 bullets = pygame.sprite.Group()
@@ -40,6 +40,8 @@ is_auto = False
 is_shotgun = False
 gun_timer = 0
 timer_limit = 20
+aimer = Aim(player)
+all_sprites.add(aimer)
 
 money = 1000
 i_timer = 0
@@ -55,6 +57,7 @@ wave = 1
 kills = 0
 sp_timer = 0
 while running:
+    aimer.update(player)
     pressed_keys = pygame.key.get_pressed()
     screen.fill((0, 25, 0))
     for event in pygame.event.get():
@@ -130,9 +133,10 @@ while running:
             
         enemy.update(player, all_sprites)
     sp_timer += 1
-    if sp_timer > 10000:
+    if sp_timer > WAVE_LENGTH:
         wave += 1
         sp_timer = 0 
+
     for spawn in spawners:
         spawn.update(all_sprites, enemies_group, wave)
 
