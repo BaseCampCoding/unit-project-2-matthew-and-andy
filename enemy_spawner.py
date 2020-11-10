@@ -3,21 +3,6 @@ from constants import *
 from classes import * 
 import random 
 
-#enemy spawning
-class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Enemy,self).__init__()
-        self.image = pygame.image.load(r"zombie.png").convert_alpha()
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randrange(0,SCREEN_WIDTH - self.rect.width)
-        self.rect.y = -self.rect.height
-        self.vel_x = 0 
-        self.vel_y = random.randrange(3,8)
-
-    def update(self):
-        self.rect.x +=  self.vel_x
-        self.rect.y += self.vel_y
-
 #enemy spawner
 class Enemy_Spawner(pygame.sprite.Sprite):
     def __init__(self, cor: tuple):

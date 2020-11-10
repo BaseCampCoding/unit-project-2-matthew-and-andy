@@ -29,6 +29,10 @@ spawners.add(spawner)
 
 running = True
 
+bullet_damage = 1
+
+money = 0
+
 while running:
 
     # zombie.update(player, all_sprites)
@@ -53,7 +57,16 @@ while running:
     
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys)
+    for b in bullets:
+        b.update()
     for enemy in enemies_group:
+        for bullet in bullets:
+            if pygame.sprite.collide_rect(enemy, bullet):
+                enemy.health -= bullet_damage
+                if enemy.health <= 0:
+                    money += 10
+                    enemy.kill()
+                bullet.kill()
         enemy.update(player, all_sprites)
     
     for spawn in spawners:
