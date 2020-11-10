@@ -110,6 +110,8 @@ class Zombie(pygame.sprite.Sprite):
         p_y = player.rect.top
         z_x = self.rect.right 
         z_y = self.rect.top 
+        z_b = self.rect.bottom
+        z_l = self.rect.left
         move_x = 0
         move_y = 0
         if p_x > z_x:
@@ -143,21 +145,20 @@ class Zombie(pygame.sprite.Sprite):
                 temp = i
         if hit == True:
             if temp.rect.right > z_x and temp.rect.top < z_y:
-                print("state A")
                 move_y = 1
                 move_x = 0
-            elif temp.rect.left < z_x and temp.rect.bottom < z_y:
-                print("state B")
+            elif temp.rect.right < z_l and temp.rect.bottom < z_y:
                 move_y = -1
                 move_x = 0
             elif temp.rect.top > z_y:
-                print("state C")
                 move_x = 1
                 move_y = 0
             elif temp.rect.bottom < z_y:
-                print("state D")
                 move_x = -1
                 move_y = 0
+            else:
+                move_x = 1
+                move_y = 1
         self.rect.move_ip((move_x * self.speed, move_y * self.speed))
 
 class Wall(pygame.sprite.Sprite):
