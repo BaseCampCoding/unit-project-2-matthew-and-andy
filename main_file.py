@@ -13,18 +13,24 @@ all_sprites.add(player)
 
 enemies_group = pygame.sprite.Group()
 
-zombie = Zombie((500, 500), 0, 1)
-all_sprites.add(zombie)
+
+# zombie = Zombie((500, 500), 0, 1)
+# enemies_group = pygame.sprite.Group()
+# all_sprites.add(zombie)
 
 wall = Wall((400, 400), (50, 50))
 all_sprites.add(wall)
 bullets = pygame.sprite.Group()
 
-spawner = Enemy_Spawner((300, 300))
+spawner = Enemy_Spawner((500, 500))
+spawners = pygame.sprite.Group()
+all_sprites.add(spawner)
+spawners.add(spawner)
 
 running = True
 
 while running:
+
     # zombie.update(player, all_sprites)
     screen.fill((0, 25, 0))
     for event in pygame.event.get():
@@ -47,11 +53,13 @@ while running:
     
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys)
+    for enemy in enemies_group:
+        enemy.update(player, all_sprites)
+    
+    for spawn in spawners:
+        spawn.update(all_sprites, enemies_group)
+
     for entity in all_sprites:
-        try:
-            entity.update()
-        except:
-            pass
         screen.blit(entity.surf, entity.rect)
 
     screen.blit(player.surf, player.rect)
