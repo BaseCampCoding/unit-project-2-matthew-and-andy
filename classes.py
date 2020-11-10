@@ -26,6 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.surf = pygame.Surface((25, 25))
         self.surf.fill(colors["White"])
         self.rect = self.surf.get_rect()
+        self.hp = 10
         self.angle = 0
     def update(self, pressed_keys, walls):
         if pressed_keys[K_UP]:

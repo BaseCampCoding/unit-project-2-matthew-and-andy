@@ -19,8 +19,8 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         all_sprite.add(new_zombie)
         enemy_group.add(new_zombie)
 
-    def update(self, all_sprite, enemy_group):
+    def update(self, all_sprite, enemy_group, wave):
         self.cur_time += 1
         if self.cur_time >= self.spawn_timer:
-            self.spawn_enemy(all_sprite, enemy_group)
+            self.spawn_enemy(all_sprite, enemy_group, wave)
             self.cur_time = 0

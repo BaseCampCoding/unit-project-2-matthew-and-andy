@@ -42,6 +42,7 @@ gun_timer = 0
 timer_limit = 20
 
 money = 1000
+i_timer = 0
 
 def use_shotgun():
     for m in range(5):
@@ -51,6 +52,7 @@ def use_shotgun():
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
 wave = 0 
+kills = 0
 sp_timer = 0
 while running:
     pressed_keys = pygame.key.get_pressed()
@@ -113,8 +115,18 @@ while running:
                 enemy.health -= bullet_damage
                 if enemy.health <= 0:
                     money += 10
+                    kills += 1
                     enemy.kill()
                 bullet.kill()
+        if pygame.sprite.collide_rect(enemy, player) and i_timer == 0:
+            player.hp -= 1
+            print("OH NO")
+            i_timer = 100
+    if player.hp <= 0:
+        running = False
+    if i_timer > 0:
+        i_timer -= 1
+            
         enemy.update(player, all_sprites)
     sp_timer += 1
     if sp_timer > 10000:
@@ -131,3 +143,6 @@ while running:
     clock.tick(FRAMERATE)
 
 pygame.quit()
+
+# TEMPORARY
+print(f"Kills: {kills}, Wave: {wave}")
