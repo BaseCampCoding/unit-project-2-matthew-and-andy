@@ -189,3 +189,5 @@ class Store(pygame.sprite.Sprite):
         elif pressed_keys[K_3] and Money >= 150:
             Money -= 150
             return 3
+        else:
+            return 0 
