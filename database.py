@@ -26,4 +26,3 @@ class score():
         self.Name = Name 
         self.Wave = Wave 
         self.Kills = Kills
-=
