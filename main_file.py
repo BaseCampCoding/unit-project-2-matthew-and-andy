@@ -18,8 +18,11 @@ enemies_group = pygame.sprite.Group()
 # enemies_group = pygame.sprite.Group()
 # all_sprites.add(zombie)
 
+walls = pygame.sprite.Group()
+
 wall = Wall((400, 400), (50, 50))
 all_sprites.add(wall)
+walls.add(wall)
 bullets = pygame.sprite.Group()
 
 spawner = Enemy_Spawner((500, 500))
@@ -86,7 +89,7 @@ while running:
     else:
         gun_timer = 0
     
-    player.update(pressed_keys)
+    player.update(pressed_keys, walls)
     if pygame.sprite.pygame.sprite.collide_rect(player, store):
         redeemed = 0
         redeemed = store.update(pressed_keys, money, is_auto, is_shotgun)
@@ -100,6 +103,9 @@ while running:
 
     for b in bullets:
         b.update()
+        for i in walls:
+            if pygame.sprite.collide_rect(b, i):
+                b.kill()
     for enemy in enemies_group:
         for bullet in bullets:
             if pygame.sprite.collide_rect(enemy, bullet):
