@@ -9,11 +9,20 @@ player = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
+
+enemies_group = pygame.sprite.Group()
+
+zombie = Zombie((500, 500), 0, 1)
+all_sprites.add(zombie)
+
+wall = Wall((400, 400), (50, 50))
+all_sprites.add(wall)
 bullets = pygame.sprite.Group()
 
 running = True
 
 while running:
+    zombie.update(player, all_sprites)
     screen.fill((0, 25, 0))
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:

@@ -105,5 +105,64 @@ class Zombie(pygame.sprite.Sprite):
         self.health = health
         self.rect = self.surf.get_rect(center=cor)
     
-    def update(self):
-        self.rect.move_ip((0, 0))
+    def update(self, player, all_sprites):
+        p_x = player.rect.right
+        p_y = player.rect.top
+        z_x = self.rect.right 
+        z_y = self.rect.top 
+        move_x = 0
+        move_y = 0
+        if p_x > z_x:
+            move_x = 1
+            if p_y > z_y:
+                move_y = 1
+            elif p_y < z_y:
+                move_y = -1
+            else:
+                move_y = 0
+        elif p_x < z_x:
+            move_x = -1
+            if p_y > z_y:
+                move_y = 1
+            elif p_y < z_y:
+                move_y = -1
+            else:
+                move_y = 0
+        else:
+            if p_y > z_y:
+                move_y = 1
+            elif p_y < z_y:
+                move_y = -1
+            else:
+                move_y = 0
+
+        hit = False
+        for i in all_sprites:
+            if pygame.sprite.collide_rect(self, i) and not i == self:
+                hit = True
+                temp = i
+        if hit == True:
+            if temp.rect.right > z_x and temp.rect.top < z_y:
+                print("state A")
+                move_y = 1
+                move_x = 0
+            elif temp.rect.left < z_x and temp.rect.bottom < z_y:
+                print("state B")
+                move_y = -1
+                move_x = 0
+            elif temp.rect.top > z_y:
+                print("state C")
+                move_x = 1
+                move_y = 0
+            elif temp.rect.bottom < z_y:
+                print("state D")
+                move_x = -1
+                move_y = 0
+        self.rect.move_ip((move_x * self.speed, move_y * self.speed))
+
+class Wall(pygame.sprite.Sprite):
+    def __init__(self, cor: tuple, size: tuple):
+        super(Wall, self).__init__()
+        self.surf = pygame.Surface(size)
+        self.surf.fill(colors["Red"])
+        self.rect = self.surf.get_rect(center=cor)
