@@ -13,6 +13,9 @@ from pygame.locals import (
     K_g,
     KEYDOWN,
     QUIT,
+    K_1,
+    K_2,
+    K_3
 )
 
 speed = 2
@@ -167,3 +170,22 @@ class Wall(pygame.sprite.Sprite):
         self.surf = pygame.Surface(size)
         self.surf.fill(colors["Red"])
         self.rect = self.surf.get_rect(center=cor)
+
+
+class Store(pygame.sprite.Sprite):
+    def __init__(self, cor: tuple):
+        super(Store, self).__init__()
+        self.surf = pygame.Surface((5, 5))
+        self.surf.fill(colors["Purple"])
+        self.rect = self.surf.get_rect(center=cor)
+
+    def update(self, pressed_keys, Money):
+        if pressed_keys[K_1] and Money >= 50:
+            Money -= 50
+            return 1
+        elif pressed_keys[K_2] and Money >= 100:
+            Money -= 100 
+            return 2 
+        elif pressed_keys[K_3] and Money >= 150:
+            Money -= 150
+            return 3
