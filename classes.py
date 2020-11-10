@@ -87,3 +87,23 @@ class Bullet(pygame.sprite.Sprite):
         else:
             dir = (0, 2)
         self.rect.move_ip(dir)
+
+class Zombie(pygame.sprite.Sprite):
+    def __init__(self, cor: tuple, variant: int, wave: int):
+        super(Zombie, self).__init__()
+        speed = 1
+        health = (5 + wave) * wave
+        if variant == 0:
+            self.surf = pygame.Surface((25, 25))
+            self.surf.fill(colors["Green"])
+        else:
+            self.surf = pygame.Surface((20, 20))
+            self.surf.fill(colors["Green"])
+            health = int(round(health / 2))
+            speed = 3
+        self.speed = speed
+        self.health = health
+        self.rect = self.surf.get_rect(center=cor)
+    
+    def update(self):
+        self.rect.move_ip((0, 0))
