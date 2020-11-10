@@ -20,12 +20,43 @@ from pygame.locals import (
 
 speed = 2
 
+class Aim(pygame.sprite.Sprite):
+    def __init__(self, player):
+        super(Aim, self).__init__()
+        self.surf = pygame.Surface((5, 5))
+        self.surf.fill(colors["Purple"])
+        self.rect = self.surf.get_rect()
+    def update(self, player):
+        mod_x = 0
+        mod_y = 0
+        if player.angle == 0:
+            mod_y = -40
+        elif player.angle == 1:
+            mod_x = 40
+            mod_y = -40
+        elif player.angle == 2:
+            mod_x = 40
+        elif player.angle == 3:
+            mod_x = 40
+            mod_y = 40
+        elif player.angle == 4:
+            mod_y = 40
+        elif player.angle == 5:
+            mod_x = -40
+            mod_y = 40
+        elif player.angle == 6:
+            mod_x = -40
+        else:
+            mod_x = -40
+            mod_y = -40
+        self.rect = self.surf.get_rect(center=(player.rect.x + mod_x + 10, player.rect.y + mod_y + 10))
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
         self.surf = pygame.Surface((25, 25))
         self.surf.fill(colors["White"])
         self.rect = self.surf.get_rect()
+        self.hp = 10
         self.angle = 0
     def update(self, pressed_keys, walls):
         if pressed_keys[K_UP]:
@@ -54,6 +85,26 @@ class Player(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
+
+        #indicator
+        if self.angle == 0:
+            dir = (0, -5)
+        elif self.angle == 1:
+            dir = (5, -5)
+        elif self.angle == 2:
+            dir = (5, 0)
+        elif self.angle == 3:
+            dir = (5, 5)
+        elif self.angle == 4:
+            dir = (0, 5)
+        elif self.angle == 5:
+            dir = (-5, 5)
+        elif self.angle == 6:
+            dir = (-5, 0)
+        elif self.angle == 7:
+            dir = (-5, -5)
+        else:
+            dir = (0, 2)
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, angle: int):
@@ -97,16 +148,16 @@ class Zombie(pygame.sprite.Sprite):
         speed = 1
         health = (5 + wave) * wave
         if variant == 0:
-            self.surf = pygame.Surface((25, 25))
-            self.surf.fill(colors["Green"])
+            self.surf = pygame.image.load(r"zombie.png").convert_alpha()
         else:
-            self.surf = pygame.Surface((20, 20))
-            self.surf.fill(colors["Green"])
+            self.surf = pygame.image.load(r"zombie.png").convert_alpha()
             health = int(round(health / 2))
             speed = 3
         self.speed = speed
         self.health = health
         self.rect = self.surf.get_rect(center=cor)
+        self.pre_x = 0
+        self.pre_y = 0
     
     def update(self, player, all_sprites):
         p_x = player.rect.right
@@ -142,6 +193,7 @@ class Zombie(pygame.sprite.Sprite):
                 move_y = 0
 
         hit = False
+        
         for i in all_sprites:
             if pygame.sprite.collide_rect(self, i) and not i == self:
                 hit = True
@@ -163,6 +215,12 @@ class Zombie(pygame.sprite.Sprite):
                 move_x = 1
                 move_y = 1
         self.rect.move_ip((move_x * self.speed, move_y * self.speed))
+        #animation
+        # pygame.transform.flip(, True, False)
+        if move_x != self.pre_x:
+            self.surf = pygame.transform.flip(self.surf, True, False)
+        self.pre_x = move_x
+        # self.pre_y = move_y
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, size: tuple):
@@ -175,7 +233,7 @@ class Wall(pygame.sprite.Sprite):
 class Store(pygame.sprite.Sprite):
     def __init__(self, cor: tuple):
         super(Store, self).__init__()
-        self.surf = pygame.Surface((5, 5))
+        self.surf = pygame.Surface((15, 15))
         self.surf.fill(colors["Purple"])
         self.rect = self.surf.get_rect(center=cor)
 
