@@ -11,6 +11,10 @@ player = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
+# title and icon
+pygame.display.set_caption("Z Shooters")
+icon = pygame.image.load(r"zombie (1).png")
+pygame.display.set_icon(icon)
 
 enemies_group = pygame.sprite.Group()
 
