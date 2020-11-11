@@ -154,8 +154,6 @@ while running:
         running = False
     if i_timer > 0:
         i_timer -= 1
-            
-        enemy.update(player, all_sprites)
     sp_timer += 1
     if sp_timer > WAVE_LENGTH:
         wave += 1
