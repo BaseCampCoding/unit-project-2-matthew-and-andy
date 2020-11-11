@@ -1,6 +1,7 @@
 import pygame
 pygame.init()
 from constants import *
+from random import randint
 
 from pygame.locals import (
     K_UP,
@@ -166,6 +167,9 @@ class Zombie(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect(center=cor)
         self.pre_x = 0
         self.pre_y = 0
+        self.move_x = 0
+        self.move_y = 0
+        self.timer = 0
     
     def update(self, player, all_sprites, zombies, aim):
         p_x = player.rect.right
@@ -174,31 +178,31 @@ class Zombie(pygame.sprite.Sprite):
         z_y = self.rect.top 
         z_b = self.rect.bottom
         z_l = self.rect.left
-        move_x = 0
-        move_y = 0
+        self.move_x = 0
+        self.move_y = 0
         if p_x > z_x:
-            move_x = 1
+            self.move_x = 1
             if p_y > z_y:
-                move_y = 1
+                self.move_y = 1
             elif p_y < z_y:
-                move_y = -1
+                self.move_y = -1
             else:
-                move_y = 0
+                self.move_y = 0
         elif p_x < z_x:
-            move_x = -1
+            self.move_x = -1
             if p_y > z_y:
-                move_y = 1
+                self.move_y = 1
             elif p_y < z_y:
-                move_y = -1
+                self.move_y = -1
             else:
-                move_y = 0
+                self.move_y = 0
         else:
             if p_y > z_y:
-                move_y = 1
+                self.move_y = 1
             elif p_y < z_y:
-                move_y = -1
+                self.move_y = -1
             else:
-                move_y = 0
+                self.move_y = 0
 
         hit = False
         
@@ -207,25 +211,47 @@ class Zombie(pygame.sprite.Sprite):
                 hit = True
                 temp = i
         if hit == True:
-            if temp.rect.right > z_x and temp.rect.top < z_y:
-                move_y = 1
-                move_x = 0
-            elif temp.rect.left < z_x and temp.rect.bottom > z_y:
-                move_y = 1
-                move_x = 1
-            elif temp.rect.top > z_y:
-                move_x = -1
-                move_y = 0
-            elif temp.rect.top < z_y:
-                move_x = 1
-                move_y = 0
-            elif temp.rect.bottom < z_y:
-                move_y = 0
-                move_x = 1
-            else:
-                move_x = 1
-                move_y = 1
-        self.rect.move_ip((move_x * self.speed, move_y * self.speed))
+            if self.move_x != 0 and self.move_y != 0:
+                obj_wid = int(temp.surf.get_size()[0] / 2)
+                obj_hi = int(temp.surf.get_size()[1] / 2)
+                is_dumb = 0
+                if self.rect.left >= temp.rect.left + obj_wid:
+                    self.move_x = -1
+                    self.move_y = 0
+                    is_dumb += 1
+                if self.rect.left < temp.rect.left + obj_wid:
+                    self.move_x = 1
+                    self.move_y = 0
+                    is_dumb += 1
+                if self.rect.top >= temp.rect.top + obj_hi:
+                    self.move_y = -1
+                    self.move_x = 0
+                    is_dumb += 1
+                if self.rect.top < temp.rect.top + obj_hi:
+                    self.move_y = 1
+                    self.move_x = 0
+                    is_dumb += 1
+                if is_dumb > 1:
+                    self.move_y *= -1
+                    self.move_x *= -1
+                # else:
+                #     self.move_y = random.randint(-10, 10)
+                #     self.move_x = random.randint(-10, 10)
+            elif self.move_x != 0 and self.move_y == 0:
+                # if self_y < p_y:
+                #     self.move_y = 1
+                # else:
+                #     self.move_y = -1
+                self.move_y = self.move_x
+                self.move_x = 0
+            elif self.move_x == 0 and self.move_y != 0:
+                # if self_x < p_x:
+                #     self.move_x = 1
+                # else:
+                #     self.move_x = -1
+                self.move_x = self.move_y
+                self.move_y = 0
+        self.rect.move_ip((self.move_x * self.speed, self.move_y * self.speed))
         #animation
         # pygame.transform.flip(, True, False)
         # if move_x != self.pre_x and move_x != 0:
