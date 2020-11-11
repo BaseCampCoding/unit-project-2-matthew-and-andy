@@ -8,6 +8,8 @@ from pygame.locals import (
     K_LEFT,
     K_RIGHT,
     K_ESCAPE,
+    K_BACKSPACE,
+    K_RETURN,
     K_t,
     K_r,
     K_g,

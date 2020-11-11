@@ -2,7 +2,7 @@ from constants import *
 from classes import * 
 from enemy_spawner import Enemy_Spawner
 from random import randint
-from database import score, insert_score, PrintOut
+from database import score, insert_score, PrintOut, close
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -63,9 +63,15 @@ def use_shotgun():
         new_bullet = Bullet((player.rect.x + i, player.rect.y + j), player.angle)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
+
+def takeSecond(elem):
+    return elem[1]
+
+#game running initialization
 wave = 1
 kills = 0
 sp_timer = 0
+
 while running:
     aimer.update(player)
     pressed_keys = pygame.key.get_pressed()
@@ -175,13 +181,36 @@ while running:
     pygame.display.flip()
     clock.tick(FRAMERATE)
 
+in_leader_board = False
+text = ''
+running = True
+while running:
+    screen.fill((0, 25, 0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN and in_leader_board == False:
+                cur_score = score(text, wave, kills)
+                insert_score(cur_score)
+                in_leader_board = True
+            elif event.key == pygame.K_BACKSPACE:
+                text = text[:-1]
+            else:
+                text += event.unicode
+    if in_leader_board == False:
+        screen.blit(FONT.render("Please enter your name", True, (255, 255, 0)), (50, 300))
+        screen.blit(FONT.render(text, True, (255, 255, 0)), (50, 350))
+    else:
+        score_board = PrintOut()
+        score_board.sort(key=takeSecond, reverse=True)
+        z = 30
+        for row in score_board:
+            screen.blit(FONT.render(f"Name: {row[0]}, Waves: {row[1]}, Kills: {row[2]}", True, (255, 255, 0)), (50, z))
+            z += 30
+            if z > 300:
+                break
+    pygame.display.flip()
+    clock.tick(FRAMERATE)
+close()
 pygame.quit()
-
-cur_name = input("What is your name, so that we can put you on the leader board? ")
-cur_score = score(cur_name, wave, kills)
-insert_score(cur_score)
-PrintOut()
-
-
-# TEMPORARY
-# print(f"Kills: {kills}, Wave: {wave}")
