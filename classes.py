@@ -167,7 +167,7 @@ class Zombie(pygame.sprite.Sprite):
         self.pre_x = 0
         self.pre_y = 0
     
-    def update(self, player, all_sprites):
+    def update(self, player, all_sprites, zombies):
         p_x = player.rect.right
         p_y = player.rect.top
         z_x = self.rect.right 
@@ -203,7 +203,7 @@ class Zombie(pygame.sprite.Sprite):
         hit = False
         
         for i in all_sprites:
-            if pygame.sprite.collide_rect(self, i) and not i == self:
+            if pygame.sprite.collide_rect(self, i) and not i == self and not i in zombies:
                 hit = True
                 temp = i
         if hit == True:
