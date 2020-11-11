@@ -39,7 +39,7 @@ for cor in spawn_point_list:
     spawners.add(new)
     all_sprites.add(new)
 
-store = Store((100, 100))
+store = Store((750, 100))
 all_sprites.add(store)
 
 running = True
