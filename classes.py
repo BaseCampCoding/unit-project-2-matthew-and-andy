@@ -15,7 +15,8 @@ from pygame.locals import (
     QUIT,
     K_1,
     K_2,
-    K_3
+    K_3,
+    K_4
 )
 
 speed = 2
@@ -245,11 +246,13 @@ class Store(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect(center=cor)
 
     def update(self, pressed_keys, Money, is_auto, is_shotgun):
-        if pressed_keys[K_1] and Money >= 50:
+        if pressed_keys[K_1] and Money >= 300:
             return 1
         elif pressed_keys[K_2] and Money >= 100 and is_auto == False:
             return 2 
         elif pressed_keys[K_3] and Money >= 150 and is_shotgun == False:
             return 3
+        elif pressed_keys[K_4] and Money >= 200
+            return 4
         else:
             return 0 
