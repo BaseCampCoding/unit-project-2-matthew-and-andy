@@ -151,16 +151,15 @@ class Zombie(pygame.sprite.Sprite):
             self.surf = pygame.image.load(r"zombie.png").convert_alpha()
         elif variant == 1:#tank
             self.surf = pygame.image.load(r"zombie (3).png").convert_alpha()
-            health = 10 
-            speed = int(round(speed / 2))
+            health = health * 2
         elif variant == 2:#speedy
             self.surf = pygame.image.load(r"zombie (1).png").convert_alpha()
             health = int(round(health / 2))
             speed = 3
         elif variant == 3: #BOSS
             self.surf = pygame.image.load(r"BOSS.png").convert_alpha()
-            health = 100 
-            speed = 10 
+            health = health * 10 
+            speed = 4
         self.speed = speed
         self.health = health
         self.rect = self.surf.get_rect(center=cor)
