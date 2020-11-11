@@ -11,6 +11,10 @@ player = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
+#background
+background = pygame.image.load(r"darkfloor.jpg")
+
+
 # title and icon
 pygame.display.set_caption("Z Shooters")
 icon = pygame.image.load(r"zombie (1).png")
@@ -76,7 +80,8 @@ while running:
     aimer.update(player)
     pressed_keys = pygame.key.get_pressed()
     screen.fill((0, 25, 0))
-
+    #background image 
+    screen.blit(background,(0,0))
     #event management
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -186,6 +191,8 @@ text = ''
 running = True
 while running:
     screen.fill((0, 25, 0))
+    #background image 
+    screen.blit(background,(0,0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
