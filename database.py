@@ -10,7 +10,8 @@ try:
                 )""")
 except:
     pass
-
+def close():
+    return con.close()
 con.commit()
 def insert_score(score):
     with con:
@@ -19,7 +20,6 @@ def insert_score(score):
 def PrintOut():
     cur.execute('SELECT Name, Wave, Kills FROM HighScore')
     return cur.fetchall()
-con.close()
 
 class score():
     def __init__(self,Name, Wave, Kills):
