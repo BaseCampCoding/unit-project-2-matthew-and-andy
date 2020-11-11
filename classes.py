@@ -216,7 +216,7 @@ class Zombie(pygame.sprite.Sprite):
             elif temp.rect.top > z_y and temp.rect.right < z_l:
                 move_x = 1
                 move_y = 0
-            elif temp.rect.bottom < z_y:
+            elif temp.rect.bottom < z_y and temp.rect.left > z_l:
                 move_x = -1
                 move_y = 0
             else:
@@ -252,7 +252,7 @@ class Store(pygame.sprite.Sprite):
             return 2 
         elif pressed_keys[K_3] and Money >= 150 and is_shotgun == False:
             return 3
-        elif pressed_keys[K_4] and Money >= 200
+        elif pressed_keys[K_4] and Money >= 200:
             return 4
         else:
             return 0 
