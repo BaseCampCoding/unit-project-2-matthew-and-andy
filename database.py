@@ -18,8 +18,8 @@ def insert_score(score):
     con.commit()
 def PrintOut():
     cur.execute('SELECT Name, Wave, Kills FROM HighScore')
-    print(cur.fetchall())
-    con.close()
+    return cur.fetchall()
+con.close()
 
 class score():
     def __init__(self,Name, Wave, Kills):
