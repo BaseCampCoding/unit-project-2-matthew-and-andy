@@ -147,12 +147,20 @@ class Zombie(pygame.sprite.Sprite):
         super(Zombie, self).__init__()
         speed = 1
         health = (5 + wave) * wave
-        if variant == 0:
+        if variant == 0:#common 
             self.surf = pygame.image.load(r"zombie.png").convert_alpha()
-        else:
-            self.surf = pygame.image.load(r"zombie.png").convert_alpha()
+        elif variant == 1:#tank
+            self.surf = pygame.image.load(r"zombie (3).png").convert_alpha()
+            health = 10 
+            speed = int(round(speed / 2))
+        elif variant == 2:#speedy
+            self.surf = pygame.image.load(r"zombie (1).png").convert_alpha()
             health = int(round(health / 2))
             speed = 3
+        elif variant == 3: #BOSS
+            self.surf = pygame.image.load(r"BOSS.png").convert_alpha()
+            health = 100 
+            speed = 10 
         self.speed = speed
         self.health = health
         self.rect = self.surf.get_rect(center=cor)
@@ -239,13 +247,10 @@ class Store(pygame.sprite.Sprite):
 
     def update(self, pressed_keys, Money, is_auto, is_shotgun):
         if pressed_keys[K_1] and Money >= 50:
-            Money -= 50
             return 1
         elif pressed_keys[K_2] and Money >= 100 and is_auto == False:
-            Money -= 100 
             return 2 
         elif pressed_keys[K_3] and Money >= 150 and is_shotgun == False:
-            Money -= 150
             return 3
         else:
             return 0 
