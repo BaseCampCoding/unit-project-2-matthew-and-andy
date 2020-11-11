@@ -173,7 +173,8 @@ while running:
         i_timer -= 1
     sp_timer += 1
     if sp_timer > WAVE_LENGTH:
-        wave += 1
+        if wave < 20:
+            wave += 1
         sp_timer = 0 
 
     for spawn in spawners:
