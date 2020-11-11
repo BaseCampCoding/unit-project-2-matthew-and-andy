@@ -24,16 +24,20 @@ enemies_group = pygame.sprite.Group()
 # all_sprites.add(zombie)
 
 walls = pygame.sprite.Group()
+wall_list = [[(450, 300), (50, 300)], [(450, 150), (300, 50)]]
+for cor in wall_list:
+    wall = Wall(cor[0], cor[1])
+    all_sprites.add(wall)
+    walls.add(wall)
 
-wall = Wall((300, 300), (50, 50))
-all_sprites.add(wall)
-walls.add(wall)
 bullets = pygame.sprite.Group()
 
-spawner = Enemy_Spawner((500, 500))
 spawners = pygame.sprite.Group()
-all_sprites.add(spawner)
-spawners.add(spawner)
+spawn_point_list = [(800, 500), (50, 500)]
+for cor in spawn_point_list:
+    new = Enemy_Spawner(cor)
+    spawners.add(new)
+    all_sprites.add(new)
 
 store = Store((100, 100))
 all_sprites.add(store)
@@ -49,6 +53,7 @@ aimer = Aim(player)
 all_sprites.add(aimer)
 
 money = 1000
+FONT = pygame.font.SysFont('Consolas', 15)
 i_timer = 0
 
 def use_shotgun():
@@ -65,6 +70,8 @@ while running:
     aimer.update(player)
     pressed_keys = pygame.key.get_pressed()
     screen.fill((0, 25, 0))
+
+    #event management
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_g and is_auto == False:
@@ -101,14 +108,25 @@ while running:
         gun_timer = 0
     
     player.update(pressed_keys, walls)
+
+    #used for drawing the player's stats on screen
+    screen.blit(FONT.render("HP: " + str(player.hp), True, (255, 255, 0)), (player.rect.x, player.rect.top-20))
+    screen.blit(FONT.render("$" + str(money), True, (255, 255, 0)), (30, 30))
+    screen.blit(FONT.render("Wave " + str(wave), True, (255, 255, 0)), (30, 60))
+    screen.blit(FONT.render(str(kills) + " Kills", True, (255, 255, 0)), (30, 90))
+
+    #used for making sure the player is in the store before they can buy stuff
     if pygame.sprite.pygame.sprite.collide_rect(player, store):
         redeemed = 0
         redeemed = store.update(pressed_keys, money, is_auto, is_shotgun)
         if redeemed == 1:
+            money -= 50
             bullet_damage += 1
         elif redeemed == 2:
+            money -= 100
             is_auto = True
         elif redeemed == 3:
+            money -= 150
             is_shotgun = True
 
 
@@ -119,6 +137,7 @@ while running:
                 b.kill()
     for enemy in enemies_group:
         enemy.update(player, all_sprites)
+        screen.blit(FONT.render("HP: " + str(enemy.health), True, (255, 255, 0)), (enemy.rect.x, enemy.rect.top-20))
         for bullet in bullets:
             if pygame.sprite.collide_rect(enemy, bullet):
                 enemy.health -= bullet_damage

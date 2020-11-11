@@ -6,7 +6,7 @@ colors = {
     "Purple": (205, 0, 255)
 }
 
-SCREEN_WIDTH = 800
+SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 600
 
 WAVE_LENGTH = 2000
