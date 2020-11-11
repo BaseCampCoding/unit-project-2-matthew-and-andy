@@ -210,7 +210,7 @@ class Zombie(pygame.sprite.Sprite):
             if temp.rect.right > z_x and temp.rect.top < z_y:
                 move_y = 1
                 move_x = 0
-            elif temp.rect.right < z_x:
+            elif temp.rect.left < z_x and temp.rect.bottom > z_y:
                 move_y = 1
                 move_x = 1
             elif temp.rect.top > z_y:

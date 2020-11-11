@@ -58,8 +58,8 @@ i_timer = 0
 
 def use_shotgun():
     for m in range(5):
-        i = randint(-15, 15)
-        j = randint(-15, 15)
+        i = randint(20, 40)
+        j = randint(20, 40)
         new_bullet = Bullet((player.rect.x + i, player.rect.y + j), player.angle)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
