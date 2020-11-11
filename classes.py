@@ -56,8 +56,7 @@ class Aim(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.Surface((25, 25))
-        self.surf.fill(colors["White"])
+        self.surf = pygame.image.load(r"soldier.png").convert_alpha()
         self.rect = self.surf.get_rect(center=(450, 30))
         self.hp = 10
         self.angle = 0
