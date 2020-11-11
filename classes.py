@@ -26,33 +26,32 @@ speed = 2
 class Aim(pygame.sprite.Sprite):
     def __init__(self, player):
         super(Aim, self).__init__()
-        self.surf = pygame.Surface((5, 5))
-        self.surf.fill(colors["Purple"])
+        self.surf = pygame.image.load(r"target.png").convert_alpha()
         self.rect = self.surf.get_rect()
     def update(self, player):
         mod_x = 0
         mod_y = 0
         if player.angle == 0:
-            mod_y = -40
+            mod_y = -80
         elif player.angle == 1:
-            mod_x = 40
-            mod_y = -40
+            mod_x = 80
+            mod_y = -80
         elif player.angle == 2:
-            mod_x = 40
+            mod_x = 80
         elif player.angle == 3:
-            mod_x = 40
-            mod_y = 40
+            mod_x = 80
+            mod_y = 80
         elif player.angle == 4:
-            mod_y = 40
+            mod_y = 80
         elif player.angle == 5:
-            mod_x = -40
-            mod_y = 40
+            mod_x = -80
+            mod_y = 80
         elif player.angle == 6:
-            mod_x = -40
+            mod_x = -80
         else:
-            mod_x = -40
-            mod_y = -40
-        self.rect = self.surf.get_rect(center=(player.rect.x + mod_x + 10, player.rect.y + mod_y + 10))
+            mod_x = -80
+            mod_y = -80
+        self.rect = self.surf.get_rect(center=(player.rect.x + mod_x + 32, player.rect.y + mod_y + 32))
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
@@ -168,7 +167,7 @@ class Zombie(pygame.sprite.Sprite):
         self.pre_x = 0
         self.pre_y = 0
     
-    def update(self, player, all_sprites, zombies):
+    def update(self, player, all_sprites, zombies, aim):
         p_x = player.rect.right
         p_y = player.rect.top
         z_x = self.rect.right 
@@ -204,7 +203,7 @@ class Zombie(pygame.sprite.Sprite):
         hit = False
         
         for i in all_sprites:
-            if pygame.sprite.collide_rect(self, i) and not i == self and not i in zombies:
+            if pygame.sprite.collide_rect(self, i) and not i == self and not i in zombies and not i == aim:
                 hit = True
                 temp = i
         if hit == True:

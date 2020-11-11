@@ -82,7 +82,7 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_g and is_auto == False:
                 if is_shotgun == False:
-                    new_bullet = Bullet((player.rect.left + 12, player.rect.top + 12), player.angle)
+                    new_bullet = Bullet((player.rect.left + 32, player.rect.top + 32), player.angle)
                     bullets.add(new_bullet)
                     all_sprites.add(new_bullet)
                 else:
@@ -149,7 +149,7 @@ while running:
             if pygame.sprite.collide_rect(b, i):
                 b.kill()
     for enemy in enemies_group:
-        enemy.update(player, all_sprites, enemies_group)
+        enemy.update(player, all_sprites, enemies_group, aimer)
         screen.blit(FONT.render("HP: " + str(enemy.health), True, (255, 255, 0)), (enemy.rect.x, enemy.rect.top-20))
         for bullet in bullets:
             if pygame.sprite.collide_rect(enemy, bullet):
