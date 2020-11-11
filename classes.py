@@ -244,8 +244,7 @@ class Wall(pygame.sprite.Sprite):
 class Store(pygame.sprite.Sprite):
     def __init__(self, cor: tuple):
         super(Store, self).__init__()
-        self.surf = pygame.Surface((15, 15))
-        self.surf.fill(colors["Purple"])
+        self.surf = pygame.image.load(r"gun-shop.png").convert_alpha()
         self.rect = self.surf.get_rect(center=cor)
 
     def update(self, pressed_keys, Money, is_auto, is_shotgun):
