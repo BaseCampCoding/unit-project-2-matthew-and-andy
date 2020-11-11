@@ -56,7 +56,7 @@ class Player(pygame.sprite.Sprite):
         super(Player, self).__init__()
         self.surf = pygame.Surface((25, 25))
         self.surf.fill(colors["White"])
-        self.rect = self.surf.get_rect()
+        self.rect = self.surf.get_rect(center=(450, 30))
         self.hp = 10
         self.angle = 0
     def update(self, pressed_keys, walls):
@@ -210,15 +210,18 @@ class Zombie(pygame.sprite.Sprite):
             if temp.rect.right > z_x and temp.rect.top < z_y:
                 move_y = 1
                 move_x = 0
-            elif temp.rect.right < z_l and temp.rect.bottom < z_y:
-                move_y = -1
-                move_x = 0
-            elif temp.rect.top > z_y and temp.rect.right < z_l:
+            elif temp.rect.right < z_x:
+                move_y = 1
                 move_x = 1
-                move_y = 0
-            elif temp.rect.bottom < z_y and temp.rect.left > z_l:
+            elif temp.rect.top > z_y:
                 move_x = -1
                 move_y = 0
+            elif temp.rect.top < z_y:
+                move_x = 1
+                move_y = 0
+            elif temp.rect.bottom < z_y:
+                move_y = 0
+                move_x = 1
             else:
                 move_x = 1
                 move_y = 1

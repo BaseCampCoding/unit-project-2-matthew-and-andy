@@ -120,7 +120,7 @@ while running:
         screen.blit(FONT.render("1. Bullet Damage ($300)", True, (255, 255, 0)), (300, 30))
         screen.blit(FONT.render("2. Fully-Automatic ($100)", True, (255, 255, 0)), (300, 50))
         screen.blit(FONT.render("3. Shotgun ($100)", True, (255, 255, 0)), (300, 70))
-        screen.blit(FONT.render("3. +1 HP ($200)", True, (255, 255, 0)), (300, 90))
+        screen.blit(FONT.render("4. +1 HP ($200)", True, (255, 255, 0)), (300, 90))
         redeemed = 0
         redeemed = store.update(pressed_keys, money, is_auto, is_shotgun)
         if redeemed == 1:
@@ -155,7 +155,6 @@ while running:
                 bullet.kill()
         if pygame.sprite.collide_rect(enemy, player) and i_timer == 0:
             player.hp -= 1
-            print("OH NO")
             i_timer = 100
     if player.hp <= 0:
         running = False
