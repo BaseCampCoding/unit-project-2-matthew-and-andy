@@ -52,11 +52,11 @@ bullet_damage = 1
 is_auto = False
 is_shotgun = False
 gun_timer = 0
-timer_limit = 20
+timer_limit = 5
 aimer = Aim(player)
 all_sprites.add(aimer)
 
-money = 1000
+money = 0
 FONT = pygame.font.SysFont('Consolas', 15)
 i_timer = 0
 
@@ -79,7 +79,6 @@ sp_timer = 0
 while running:
     aimer.update(player)
     pressed_keys = pygame.key.get_pressed()
-    screen.fill((0, 25, 0))
     #background image 
     screen.blit(background,(0,0))
     #event management
@@ -106,13 +105,13 @@ while running:
     if pressed_keys[K_g] and is_auto == True and is_shotgun == False:
         gun_timer += 1
         if gun_timer > timer_limit:
-            new_bullet = Bullet((player.rect.left + 12, player.rect.top + 12), player.angle)
+            new_bullet = Bullet((player.rect.left + 32, player.rect.top + 32), player.angle)
             bullets.add(new_bullet)
             all_sprites.add(new_bullet)
             gun_timer = 0
     elif pressed_keys[K_g] and is_auto == True and is_shotgun == True:
         gun_timer += 1
-        if gun_timer > timer_limit:
+        if gun_timer > timer_limit + 5:
             use_shotgun()
             gun_timer = 0
     else:
@@ -130,7 +129,7 @@ while running:
     if pygame.sprite.pygame.sprite.collide_rect(player, store):
         screen.blit(FONT.render("1. Bullet Damage ($300)", True, (255, 255, 0)), (300, 30))
         screen.blit(FONT.render("2. Fully-Automatic ($100)", True, (255, 255, 0)), (300, 50))
-        screen.blit(FONT.render("3. Shotgun ($100)", True, (255, 255, 0)), (300, 70))
+        screen.blit(FONT.render("3. Shotgun ($150)", True, (255, 255, 0)), (300, 70))
         screen.blit(FONT.render("4. +1 HP ($200)", True, (255, 255, 0)), (300, 90))
         redeemed = 0
         redeemed = store.update(pressed_keys, money, is_auto, is_shotgun)

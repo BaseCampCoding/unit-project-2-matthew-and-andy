@@ -58,7 +58,7 @@ class Player(pygame.sprite.Sprite):
         super(Player, self).__init__()
         self.surf = pygame.image.load(r"soldier.png").convert_alpha()
         self.rect = self.surf.get_rect(center=(450, 30))
-        self.hp = 10
+        self.hp = 15
         self.angle = 0
     def update(self, pressed_keys, walls):
         if pressed_keys[K_UP]:
@@ -143,12 +143,14 @@ class Bullet(pygame.sprite.Sprite):
         else:
             dir = (0, 2)
         self.rect.move_ip(dir)
+        if self.reft.x < 0 or self.rect.x > SCREEN_WIDTH or self.rect.y < 0 or self.rect.y > SCREEN_HEIGHT:
+            self.kill()
 
 class Zombie(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, variant: int, wave: int):
         super(Zombie, self).__init__()
         speed = 1
-        health = (5 + wave) * wave
+        health = 5 + wave
         if variant == 0:#common 
             self.surf = pygame.image.load(r"zombie.png").convert_alpha()
         elif variant == 1:#tank
@@ -157,11 +159,11 @@ class Zombie(pygame.sprite.Sprite):
         elif variant == 2:#speedy
             self.surf = pygame.image.load(r"zombie (1).png").convert_alpha()
             health = int(round(health / 2))
-            speed = 3
+            speed = 2
         elif variant == 3: #BOSS
             self.surf = pygame.image.load(r"BOSS.png").convert_alpha()
             health = health * 10 
-            speed = 4
+            speed = 3
         self.speed = speed
         self.health = health
         self.rect = self.surf.get_rect(center=cor)
