@@ -143,7 +143,7 @@ class Bullet(pygame.sprite.Sprite):
         else:
             dir = (0, 2)
         self.rect.move_ip(dir)
-        if self.reft.x < 0 or self.rect.x > SCREEN_WIDTH or self.rect.y < 0 or self.rect.y > SCREEN_HEIGHT:
+        if self.rect.x < 0 or self.rect.x > SCREEN_WIDTH or self.rect.y < 0 or self.rect.y > SCREEN_HEIGHT:
             self.kill()
 
 class Zombie(pygame.sprite.Sprite):
