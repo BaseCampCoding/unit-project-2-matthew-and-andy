@@ -194,7 +194,7 @@ class Zombie(pygame.sprite.Sprite):
             elif self.sub_variant_chance == 11:
                 self.surf = pygame.image.load(r"biggergonzo.png")
                 self.name = "Gonzales' Big Brother"
-                speed.speed = 2
+                self.speed = 2
             else:
                 self.name = 'Speedy Gonzales'
                 self.health = int(round(self.health / 2))
