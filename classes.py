@@ -292,7 +292,7 @@ class Zombie(pygame.sprite.Sprite):
         # self.pre_y = move_y
 
 class Wall(pygame.sprite.Sprite):
-    def __init__(self, cor: tuple, size: tuple):
+    def __init__(self, cor: tuple):
         super(Wall, self).__init__()
         self.surf = pygame.image.load(r"wall.png")
         self.rect = self.surf.get_rect(center=cor)
