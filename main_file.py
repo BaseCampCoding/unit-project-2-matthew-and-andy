@@ -154,7 +154,7 @@ while running:
                 b.kill()
     for enemy in enemies_group:
         enemy.update(player, all_sprites, enemies_group, aimer)
-        screen.blit(FONT.render("HP: " + str(enemy.health), True, (255, 255, 0)), (enemy.rect.x, enemy.rect.top-20))
+        screen.blit(FONT.render(str(enemy.name) + ": " + str(enemy.health), True, (255, 255, 0)), (enemy.rect.x, enemy.rect.top-20))
         for bullet in bullets:
             if pygame.sprite.collide_rect(enemy, bullet):
                 enemy.health -= bullet_damage
