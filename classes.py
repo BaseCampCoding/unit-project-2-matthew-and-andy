@@ -23,6 +23,8 @@ from pygame.locals import (
 )
 
 speed = 2
+def play_sound(name):
+    pygame.mixer.Sound(name).play()
 
 class Aim(pygame.sprite.Sprite):
     def __init__(self, player):
@@ -115,6 +117,8 @@ class Bullet(pygame.sprite.Sprite):
         self.surf.fill(colors["Red"])
         self.rect = self.surf.get_rect(center=cor)
         self.angle = angle
+        play_sound(sound_effects["pew"])
+        play_sound(sound_effects["dah"])
         #0, up
         #1, up and right
         #2, right
@@ -216,6 +220,8 @@ class Zombie(pygame.sprite.Sprite):
         self.move_x = 0
         self.move_y = 0
         self.timer = 0
+        self.variant = variant
+        self.audio_timer = 0
 
     
     def update(self, player, all_sprites, zombies, aim):
@@ -299,6 +305,22 @@ class Zombie(pygame.sprite.Sprite):
                 self.move_x = self.move_y
                 self.move_y = 0
         self.rect.move_ip((self.move_x * self.speed, self.move_y * self.speed))
+
+        #audio
+        self.audio_timer += 1
+        if self.audio_timer > 200:
+            if self.variant == 0 and self.sub_variant_chance < 6:
+                play_sound(sound_effects["brains"])
+            elif self.variant == 0 and self.sub_variant_chance >= 6:
+                play_sound(sound_effects["growl"])
+            elif self.variant == 1:
+                play_sound(sound_effects["growl"])
+            elif self.variant == 2 and self.sub_variant_chance < 3:
+                play_sound(sound_effects["brains"])
+            elif self.variant == 2 and self.sub_variant_chance >= 3:
+                play_sound(sound_effects["laugh"])
+            else:
+                play_sound(sound_effects["og"])
         #animation
         # pygame.transform.flip(, True, False)
         # if move_x != self.pre_x and move_x != 0:

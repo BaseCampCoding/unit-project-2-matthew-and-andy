@@ -6,6 +6,15 @@ colors = {
     "Purple": (205, 0, 255)
 }
 
+sound_effects = {
+    "pew": "pew.wav",
+    "dah": "dah.wav",
+    "brains": "brains.wav",
+    "laugh": "zombie_laugh.wav",
+    "growl": "zombie_growl.wav",
+    "og": "real_og.wav"
+}
+
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 600
 
