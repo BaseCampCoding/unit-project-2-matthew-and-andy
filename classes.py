@@ -161,6 +161,7 @@ class Zombie(pygame.sprite.Sprite):
                 self.name = 'Electric Boogoola'
                 self.damage = 2
             elif self.sub_variant_chance == 11:
+                self.surf = pygame.image.load(r"fastcommon.png")
                 self.name = 'Commoner V2'
                 self.speed = 2
             else:
@@ -174,6 +175,7 @@ class Zombie(pygame.sprite.Sprite):
                 self.name = 'Real Steel'
                 self.health = self.health * 3
             elif self.sub_variant_chance == 13:
+                self.surf = pygame.image.load(r"spiketank.png")
                 self.name = 'The Marauder'
                 self.health = int(round(self.health * 1.5))
                 self.damage = 3
@@ -190,6 +192,7 @@ class Zombie(pygame.sprite.Sprite):
                 self.speed = 3
                 self.health = int(round(self.health / 2))
             elif self.sub_variant_chance == 11:
+                self.surf = pygame.image.load(r"biggergonzo.png")
                 self.name = "Gonzales' Big Brother"
                 speed.speed = 2
             else:
