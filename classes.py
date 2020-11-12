@@ -321,6 +321,7 @@ class Zombie(pygame.sprite.Sprite):
                 play_sound(sound_effects["laugh"])
             else:
                 play_sound(sound_effects["og"])
+            self.audio_timer = randint(-100, 20)
         #animation
         # pygame.transform.flip(, True, False)
         # if move_x != self.pre_x and move_x != 0:
