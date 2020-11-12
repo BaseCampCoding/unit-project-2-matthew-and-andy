@@ -138,7 +138,7 @@ while running:
         screen.blit(FONT.render("1. Bullet Damage ($300)", True, (255, 255, 0)), (300, 30))
         screen.blit(FONT.render("2. Fully-Automatic ($100)", True, (255, 255, 0)), (300, 50))
         screen.blit(FONT.render("3. Shotgun ($150)", True, (255, 255, 0)), (300, 70))
-        screen.blit(FONT.render("4. +1 HP ($200)", True, (255, 255, 0)), (300, 90))
+        screen.blit(FONT.render("4. +1 HP ($150)", True, (255, 255, 0)), (300, 90))
         redeemed = 0
         redeemed = store.update(pressed_keys, money, is_auto, is_shotgun)
         if redeemed == 1:
@@ -151,7 +151,7 @@ while running:
             money -= 150
             is_shotgun = True
         elif redeemed == 4:
-            money -= 200
+            money -= 150
             player.hp += 1
     else:
         store_timer = 0
