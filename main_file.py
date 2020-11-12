@@ -170,7 +170,7 @@ while running:
                     enemy.kill()
                 bullet.kill()
         if pygame.sprite.collide_rect(enemy, player) and i_timer == 0:
-            player.hp -= 1
+            player.hp -= enemy.damage
             i_timer = 100
     if player.hp <= 0:
         running = False

@@ -151,9 +151,16 @@ class Zombie(pygame.sprite.Sprite):
         super(Zombie, self).__init__()
         speed = 1
         health = 5 + wave
+        damage = 1
+        sub_variant_chance = randint(1, 15)
         if variant == 0:#common 
             self.surf = pygame.image.load(r"zombie.png").convert_alpha()
-            name = 'regular joe' 
+            if sub_variant_chance == 15:
+                name = 'electric boogoola'
+                damage = 2
+            else:
+                name = 'regular joe' 
+
         elif variant == 1:#tank
             self.surf = pygame.image.load(r"zombie (3).png").convert_alpha()
             name = 'The Rock' 
@@ -171,12 +178,14 @@ class Zombie(pygame.sprite.Sprite):
         self.speed = speed
         self.health = health
         self.name = name
+        self.damage = damage
         self.rect = self.surf.get_rect(center=cor)
         self.pre_x = 0
         self.pre_y = 0
         self.move_x = 0
         self.move_y = 0
         self.timer = 0
+
     
     def update(self, player, all_sprites, zombies, aim):
         p_x = player.rect.right
