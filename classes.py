@@ -156,20 +156,29 @@ class Zombie(pygame.sprite.Sprite):
         if variant == 0:#common 
             self.surf = pygame.image.load(r"zombie.png").convert_alpha()
             if sub_variant_chance == 15:
-                name = 'electric boogoola'
+                name = 'Electric Boogoola'
                 damage = 2
             else:
-                name = 'regular joe' 
+                name = 'Regular Joe' 
 
         elif variant == 1:#tank
             self.surf = pygame.image.load(r"zombie (3).png").convert_alpha()
-            name = 'The Rock' 
-            health = health * 2
+            if sub_variant_chance == 15:
+                name = 'Real Steel'
+                health = health * 3
+            else:
+                name = 'The Rock' 
+                health = health * 2
         elif variant == 2:#speedy
             self.surf = pygame.image.load(r"zombie (1).png").convert_alpha()
-            name = 'speedy gonzales'
-            health = int(round(health / 2))
-            speed = 2
+            if sub_variant_chance == 15:
+                name = 'Insane Gonzales'
+                speed = 3
+                health = int(round(health / 2))
+            else:
+                name = 'Speedy Gonzales'
+                health = int(round(health / 2))
+                speed = 2
         elif variant == 3: #BOSS
             self.surf = pygame.image.load(r"BOSS.png").convert_alpha()
             name = 'The Imposter'

@@ -23,7 +23,6 @@ class Enemy_Spawner(pygame.sprite.Sprite):
             variant = random.randint(0,2)
         else:
             variant = random.randint(1, 3)
-        self.cur_time = 0
         new_zombie = Zombie((self.rect.x, self.rect.y - 60), variant, wave)
         all_sprite.add(new_zombie)
         enemy_group.add(new_zombie)
