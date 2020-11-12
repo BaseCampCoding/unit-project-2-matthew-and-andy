@@ -17,11 +17,11 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         variant = 0 
         if wave <= 3:
             variant = 0 
-        elif wave >= 4:
+        elif wave < 8:
             variant = random.randint(0,1) 
-        elif wave >= 8:
+        elif wave < 16:
             variant = random.randint(0,2)
-        elif wave >= 20:
+        else:
             variant = 3
         self.cur_time = 0
         new_zombie = Zombie((self.rect.x, self.rect.y - 60), variant, wave)
