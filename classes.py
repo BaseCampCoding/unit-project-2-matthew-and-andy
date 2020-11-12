@@ -149,52 +149,52 @@ class Bullet(pygame.sprite.Sprite):
 class Zombie(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, variant: int, wave: int):
         super(Zombie, self).__init__()
-        speed = 1
-        health = 5 + wave
-        damage = 1
-        sub_variant_chance = randint(1, 15)
+        self.speed = 1
+        self.health = 5 + wave
+        self.damage = 1
+        self.sub_variant_chance = randint(1, 12)
         if variant == 0:#common 
-            price = 10 
+            self.price = 10 
             self.surf = pygame.image.load(r"zombie.png").convert_alpha()
-            if sub_variant_chance == 15:
+            if self.sub_variant_chance == 12:
                 self.surf = pygame.image.load(r"electric.png").convert_alpha()
-                name = 'Electric Boogoola'
-                damage = 2
+                self.name = 'Electric Boogoola'
+                self.damage = 2
             else:
-                name = 'Regular Joe' 
+                self.name = 'Regular Joe' 
 
         elif variant == 1:#tank
-            price = 25
+            self.price = 25
             self.surf = pygame.image.load(r"zombie (3).png").convert_alpha()
-            if sub_variant_chance == 15:
+            if self.sub_variant_chance == 12:
                 self.surf = pygame.image.load(r"steel.png").convert_alpha()
-                name = 'Real Steel'
-                health = health * 3
+                self.name = 'Real Steel'
+                self.health = self.health * 3
             else:
-                name = 'The Rock' 
-                health = health * 2
+                self.name = 'The Rock' 
+                self.health = self.health * 2
         elif variant == 2:#speedy
-            price = 15
+            self.price = 15
             self.surf = pygame.image.load(r"zombie (1).png").convert_alpha()
-            if sub_variant_chance == 15:
+            if self.sub_variant_chance == 12:
                 self.surf = pygame.image.load(r"insane.png").convert_alpha()
-                name = 'Insane Gonzales'
-                speed = 3
-                health = int(round(health / 2))
+                self.name = 'Insane Gonzales'
+                self.speed = 3
+                self.health = int(round(self.health / 2))
             else:
-                name = 'Speedy Gonzales'
-                health = int(round(health / 2))
-                speed = 2
+                self.name = 'Speedy Gonzales'
+                self.health = int(round(self.health / 2))
+                self.speed = 2
         elif variant == 3: #BOSS
-            price = 1000
+            self.price = 1000
             self.surf = pygame.image.load(r"BOSS.png").convert_alpha()
-            name = 'The Imposter'
-            health = health * 10 
-            speed = 3
-        self.speed = speed
-        self.health = health
-        self.name = name
-        self.damage = damage
+            self.name = 'The Imposter'
+            self.health = self.health * 10 
+            self.speed = 3
+        # self.speed = speed
+        # self.self.health = self.health
+        # self.self.name = self.name
+        # self.self.damage = self.damage
         self.rect = self.surf.get_rect(center=cor)
         self.pre_x = 0
         self.pre_y = 0

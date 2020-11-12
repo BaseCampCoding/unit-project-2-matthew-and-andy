@@ -165,7 +165,7 @@ while running:
             if pygame.sprite.collide_rect(enemy, bullet):
                 enemy.health -= bullet_damage
                 if enemy.health <= 0:
-                    money += 10
+                    money += enemy.price
                     kills += 1
                     enemy.kill()
                 bullet.kill()
