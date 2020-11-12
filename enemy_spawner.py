@@ -10,7 +10,7 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         self.special_name = "Spawner"
         self.surf = pygame.image.load(r"z_spawner.png").convert_alpha()
         self.rect = self.surf.get_rect(center=cor)
-        self.spawn_timer = random.randrange(440, 840)
+        self.spawn_timer = random.randrange(440, 1040)
         self.cur_time = 0
     
     def spawn_enemy(self, all_sprite, enemy_group, wave):
@@ -22,7 +22,7 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         elif wave < 16:
             variant = random.randint(0,2)
         else:
-            variant = 3
+            variant = random.randint(1, 3)
         self.cur_time = 0
         new_zombie = Zombie((self.rect.x, self.rect.y - 60), variant, wave)
         all_sprite.add(new_zombie)

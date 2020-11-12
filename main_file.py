@@ -45,8 +45,7 @@ for cor in spawn_point_list:
 
 store = Store((750, 100))
 all_sprites.add(store)
-
-running = True
+store_timer = 0
 
 bullet_damage = 1
 is_auto = False
@@ -69,12 +68,14 @@ def use_shotgun():
         all_sprites.add(new_bullet)
 
 def takeSecond(elem):
-    return elem[1]
+    return (elem[1] * 5) + elem[2]
 
 #game running initialization
 wave = 1
 kills = 0
 sp_timer = 0
+
+running = True
 
 while running:
     aimer.update(player)
@@ -127,6 +128,9 @@ while running:
 
     #used for making sure the player is in the store before they can buy stuff
     if pygame.sprite.pygame.sprite.collide_rect(player, store):
+        store_timer += 1
+        if store_timer > 300:
+            player.rect.top += 200
         screen.blit(FONT.render("1. Bullet Damage ($300)", True, (255, 255, 0)), (300, 30))
         screen.blit(FONT.render("2. Fully-Automatic ($100)", True, (255, 255, 0)), (300, 50))
         screen.blit(FONT.render("3. Shotgun ($150)", True, (255, 255, 0)), (300, 70))
@@ -145,6 +149,8 @@ while running:
         elif redeemed == 4:
             money -= 200
             player.hp += 1
+    else:
+        store_timer = 0
 
 
     for b in bullets:
