@@ -26,7 +26,7 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         new_zombie = Zombie((self.rect.x, self.rect.y - 60), variant, wave)
         all_sprite.add(new_zombie)
         enemy_group.add(new_zombie)
-        self.spawn_timer = random.randint(MIN_SPAWN_TIME - wave, MAX_SPAWN_TIME - wave)
+        self.spawn_timer = random.randint(MIN_SPAWN_TIME - wave * 5, MAX_SPAWN_TIME - wave * 5)
         if self.spawn_timer < 200:
             self.spawn_timer = 200
 
