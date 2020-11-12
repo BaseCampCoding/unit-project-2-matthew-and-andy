@@ -37,7 +37,11 @@ for cor in wall_list:
 bullets = pygame.sprite.Group()
 
 spawners = pygame.sprite.Group()
-spawn_point_list = [(800, 500), (50, 500)]
+spawn_point_list = [
+    (randint(700, 800), randint(200, 560)),
+    (randint(50, 150), randint(300, 560)),
+    (randint(400, 600), randint(500, 560))
+    ]
 for cor in spawn_point_list:
     new = Enemy_Spawner(cor)
     spawners.add(new)

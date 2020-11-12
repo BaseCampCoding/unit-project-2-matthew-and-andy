@@ -17,9 +17,9 @@ class Enemy_Spawner(pygame.sprite.Sprite):
         variant = 0 
         if wave <= 3:
             variant = 0 
-        elif wave < 8:
+        elif wave < 6:
             variant = random.randint(0,1) 
-        elif wave < 16:
+        elif wave < 10:
             variant = random.randint(0,2)
         else:
             variant = random.randint(1, 3)
