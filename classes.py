@@ -187,7 +187,7 @@ class Zombie(pygame.sprite.Sprite):
                 self.speed = 2
         elif variant == 3: #BOSS
             self.price = 1000
-            self.surf = pygame.image.load(r"BOSS.png").convert_alpha()
+            self.surf = pygame.image.load(r"boss128.png").convert_alpha()
             self.name = 'The Imposter'
             self.health = self.health * 10 
             self.speed = 3
@@ -294,10 +294,8 @@ class Zombie(pygame.sprite.Sprite):
 class Wall(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, size: tuple):
         super(Wall, self).__init__()
-        self.surf = pygame.Surface(size)
-        self.surf.fill(colors["Red"])
+        self.surf = pygame.image.load(r"wall.png")
         self.rect = self.surf.get_rect(center=cor)
-
 
 class Store(pygame.sprite.Sprite):
     def __init__(self, cor: tuple):
