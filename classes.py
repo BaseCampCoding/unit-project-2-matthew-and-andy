@@ -150,7 +150,7 @@ class Zombie(pygame.sprite.Sprite):
     def __init__(self, cor: tuple, variant: int, wave: int):
         super(Zombie, self).__init__()
         self.speed = 1
-        self.health = 5 + wave
+        self.health = 5 + wave * 2
         self.damage = 1
         self.sub_variant_chance = randint(1, 12)
         if variant == 0:#common 
@@ -160,6 +160,9 @@ class Zombie(pygame.sprite.Sprite):
                 self.surf = pygame.image.load(r"electric.png").convert_alpha()
                 self.name = 'Electric Boogoola'
                 self.damage = 2
+            elif self.sub_variant_chance == 11:
+                self.name = 'Commoner V2'
+                self.speed = 2
             else:
                 self.name = 'Regular Joe' 
 
@@ -170,9 +173,14 @@ class Zombie(pygame.sprite.Sprite):
                 self.surf = pygame.image.load(r"steel.png").convert_alpha()
                 self.name = 'Real Steel'
                 self.health = self.health * 3
+            elif self.sub_variant_chance == 13:
+                self.name = 'The Marauder'
+                self.health = int(round(self.health * 1.5))
+                self.damage = 3
             else:
                 self.name = 'The Rock' 
                 self.health = self.health * 2
+                self.damage = 2
         elif variant == 2:#speedy
             self.price = 15
             self.surf = pygame.image.load(r"zombie (1).png").convert_alpha()
@@ -181,16 +189,20 @@ class Zombie(pygame.sprite.Sprite):
                 self.name = 'Insane Gonzales'
                 self.speed = 3
                 self.health = int(round(self.health / 2))
+            elif self.sub_variant_chance == 11:
+                self.name = "Gonzales' Big Brother"
+                speed.speed = 2
             else:
                 self.name = 'Speedy Gonzales'
                 self.health = int(round(self.health / 2))
                 self.speed = 2
         elif variant == 3: #BOSS
-            self.price = 1000
+            self.price = 200
             self.surf = pygame.image.load(r"boss128.png").convert_alpha()
             self.name = 'The Imposter'
             self.health = self.health * 10 
             self.speed = 3
+            self.damage = 4
         # self.speed = speed
         # self.self.health = self.health
         # self.self.name = self.name
