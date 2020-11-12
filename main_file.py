@@ -28,7 +28,7 @@ enemies_group = pygame.sprite.Group()
 # all_sprites.add(zombie)
 
 walls = pygame.sprite.Group()
-wall_list = [(450, 300)]
+wall_list = [(450, 300), (50,170),(170,50), (170,170)]
 for cor in wall_list:
     wall = Wall(cor)
     all_sprites.add(wall)
