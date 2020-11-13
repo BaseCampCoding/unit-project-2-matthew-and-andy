@@ -131,10 +131,11 @@ while running:
     screen.blit(FONT.render(str(kills) + " Kills", True, (255, 255, 0)), (30, 90))
 
     #used for making sure the player is in the store before they can buy stuff
-    if store_timer > 300:
-        player.rect.top += 200
+    
     if pygame.sprite.collide_rect(player, store):
         store_timer += 1
+        if store_timer > 300:
+            player.rect.top += 200
         screen.blit(FONT.render("1. Bullet Damage ($300)", True, (255, 255, 0)), (300, 30))
         screen.blit(FONT.render("2. Fully-Automatic ($100)", True, (255, 255, 0)), (300, 50))
         screen.blit(FONT.render("3. Shotgun ($150)", True, (255, 255, 0)), (300, 70))
@@ -155,6 +156,8 @@ while running:
             player.hp += 1
     elif pygame.sprite.spritecollideany(player, spawners):
         store_timer += 1
+        if store_timer > 300:
+            player.rect.top -= 100
     else:
         store_timer = 0
 
